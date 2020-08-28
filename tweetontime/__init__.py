@@ -1,5 +1,8 @@
+import atexit
 import os
+from datetime import datetime
 from flask import Flask
+from .tweet_on_time import tweet_scheduler
 
 
 def create_app(test_config=None):
@@ -19,10 +22,6 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
-
     from . import db
     db.init_app(app)
 
@@ -32,5 +31,8 @@ def create_app(test_config=None):
     from . import tweet
     app.register_blueprint(tweet.bp)
     app.add_url_rule('/', endpoint='index')
+
+    tweet_scheduler.start()
+    atexit.register(lambda: tweet_scheduler.shutdown(wait=False))
 
     return app

@@ -1,13 +1,37 @@
+import json
 import requests
-from .settings import BEARER_TOKEN
+import urllib
 
-url = "https://api.twitter.com/labs/2/tweets/1214281000932593667?tweet.fields=attachments,author_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,source,text,withheld"
+from apscheduler.schedulers.background import BackgroundScheduler
+from datetime import datetime
+from requests_oauthlib import OAuth1
+from .settings import API_KEY, API_SECRET_KEY, ACCESS_TOKEN, ACCESS_TOKEN_SECRET
 
-payload = {}
-headers = {
-    'Authorization': f'Bearer {BEARER_TOKEN}',
-    'Cookie': 'personalization_id="v1_zNwxTIwk1n/qlXcMjaPtnA=="; guest_id=v1%3A159555219276996589'
-}
+auth = OAuth1(API_KEY, API_SECRET_KEY, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+
+tweet_scheduler = BackgroundScheduler()
+
+
+def get_profile_info():
+    url = 'https://api.twitter.com/1.1/account/verify_credentials.json'
+    res = requests.get(url, auth=auth)
+    return json.loads(res.text)
+
+
+def post_tweet(status):
+    encoded = urllib.parse.quote(status)
+    url = f'https://api.twitter.com/1.1/statuses/update.json?status={encoded}'
+    res = requests.post(url, auth=auth)
+    return json.loads(res.text)
+
+
+def schedule_tweet(status, datetime_str):
+    tweet_scheduler.add_job(
+        lambda: post_tweet(status),
+        'date',
+        run_date=datetime.fromisoformat(datetime_str)
+    )
+
 
 if __name__ == '__main__':
     response = requests.request("GET", url, headers=headers, data=payload)
