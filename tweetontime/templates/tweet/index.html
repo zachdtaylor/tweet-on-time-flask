@@ -2,4 +2,15 @@
 
 {% block header %}
   <h1>{% block title %}Tweet{% endblock %}</h1>
+  <img src="{{ profile['profile_banner_url'] }}" alt="Twitter Profile Picture" />
+  <img src="{{ profile['profile_image_url_https'] }}" alt="Twitter Profile Picture" />
+  <form method="post">
+    <label for="body">Body</label>
+    <textarea name="body" id="body" rows="6" required></textarea>
+    <label for="tweet-date">Tweet Date</label>
+    <input type="date" id="tweet-date" name="tweet-date" required>
+    <label for="tweet-time">Tweet Time</label>
+    <input type="time" id="tweet-time" name="tweet-time" required>
+    <input type="submit" value="Schedule Tweet" />
+  </form>
 {% endblock %}
