@@ -6,6 +6,7 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from .db import get_db
+from .tweet_on_time import tweet_scheduler
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -39,6 +40,7 @@ def register():
 
     return render_template('auth/register.html')
 
+
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
@@ -58,11 +60,13 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
+            # tweet_scheduler.start()
             return redirect(url_for('index'))
 
         flash(error)
 
     return render_template('auth/login.html')
+
 
 @bp.before_app_request
 def load_logged_in_user():
@@ -75,10 +79,12 @@ def load_logged_in_user():
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
 
+
 @bp.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('index'))
+
 
 def login_required(view):
     @functools.wraps(view)
