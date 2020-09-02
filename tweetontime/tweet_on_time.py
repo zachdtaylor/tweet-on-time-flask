@@ -15,7 +15,10 @@ tweet_scheduler = BackgroundScheduler()
 def get_profile_info():
     url = 'https://api.twitter.com/1.1/account/verify_credentials.json'
     res = requests.get(url, auth=auth)
-    return json.loads(res.text)
+    data = json.loads(res.text)
+    data['profile_image_url_https'] = data['profile_image_url_https'].replace(
+        'normal', '400x400')
+    return data
 
 
 def post_tweet(status):

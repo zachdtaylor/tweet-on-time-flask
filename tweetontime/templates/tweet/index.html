@@ -1,16 +1,40 @@
-{% extends 'base.html' %}
-
-{% block header %}
-  <h1>{% block title %}Tweet{% endblock %}</h1>
-  <img src="{{ profile['profile_banner_url'] }}" alt="Twitter Profile Picture" />
-  <img src="{{ profile['profile_image_url_https'] }}" alt="Twitter Profile Picture" />
-  <form method="post">
-    <label for="body">Body</label>
-    <textarea name="body" id="body" rows="6" required></textarea>
-    <label for="tweet-date">Tweet Date</label>
-    <input type="date" id="tweet-date" name="tweet-date" required>
-    <label for="tweet-time">Tweet Time</label>
-    <input type="time" id="tweet-time" name="tweet-time" required>
-    <input type="submit" value="Schedule Tweet" />
-  </form>
+{% extends 'base.html' %} {% block title %} Tweet {% endblock %} {% block
+content %}
+<div class="mt-1">
+  <div class="head-card-content">
+    <img
+      src="{{ profile['profile_image_url_https'] }}"
+      alt="Twitter Profile Picture"
+    />
+    <div class="head-card-details">
+      <h1>{{ profile['name'] }}</h1>
+      <h2>@{{ profile['screen_name'] }}</h2>
+      <p class="mt-1">{{ profile['description'] }}</p>
+    </div>
+  </div>
+</div>
+<form method="post" class="mt-1">
+  <label for="body" class="hidden">Tweet Content</label>
+  <textarea
+    class="w-full"
+    name="body"
+    id="body"
+    rows="6"
+    placeholder="What's Happening?"
+    required
+  ></textarea>
+  <div class="flex flex-row mt-1">
+    <div>
+      <label for="tweet-date"> Date </label>
+      <input type="date" id="tweet-date" name="tweet-date" required />
+    </div>
+    <div class="mx-2">
+      <label for="tweet-time mx-1"> Time </label>
+      <input type="time" id="tweet-time" name="tweet-time" required />
+    </div>
+  </div>
+  <div class="mt-1 float-right">
+    <input type="submit" value="Schedule Tweet" class="btn" />
+  </div>
+</form>
 {% endblock %}

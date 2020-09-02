@@ -1,27 +1,35 @@
 <!DOCTYPE html>
-<title>{% block title %}{% endblock %} - Tweet On Time</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-<nav>
-  <h1>Tweet On Time</h1>
-  <ul>
-    {% if g.user %}
-    <li>
-      <span>{{ g.user["username"] }}</span>
-    </li>
-    <li><a href="{{ url_for('auth.logout') }}">Log Out</a> {% else %}</li>
+<head>
+  <title>{% block title %}{% endblock %} - Tweet On Time</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="site-container">
+    <nav class="flex flex-row justify-between">
+      <div class="vertical-center-parent w-half">
+        <h1 class="vertical-center-child">Tweet On Time</h1>
+      </div>
+      <ul class="flex flex-row">
+        {% if g.user %}
+        <a href="{{ url_for('auth.logout') }}">
+          <li>Log Out</li>
+        </a>
+        {% else %}
+        <a href="{{ url_for('auth.register') }}">
+          <li>Register</li>
+        </a>
+        <a href="{{ url_for('auth.login') }}">
+          <li>Log In</li>
+        </a>
+        {% endif %}
+      </ul>
+    </nav>
+    <section class="content">
+      <header>{% block header %}{% endblock %}</header>
 
-    <li><a href="{{ url_for('auth.register') }}">Register</a></li>
-    <li>
-      <a href="{{ url_for('auth.login') }}">Log In</a>
-      {% endif %}
-    </li>
-  </ul>
-</nav>
-<section class="content">
-  <header>
-    {% block header %}{% endblock %}
-  </header>
-  {% for message in get_flashed_messages() %}
-  <div class="flash">{{ message }}</div>
-  {% endfor %} {% block content %}{% endblock %}
-</section>
+      {% for message in get_flashed_messages() %}
+      <div class="flash">{{ message }}</div>
+      {% endfor %} {% block content %}{% endblock %}
+    </section>
+  </div>
+</body>

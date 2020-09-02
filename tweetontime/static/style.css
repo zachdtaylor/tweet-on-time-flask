@@ -1,0 +1,196 @@
+html {
+  font-family: arial, helvetica;
+  font-size: 1.1875rem;
+  color: white;
+}
+
+body {
+  margin: 0;
+  background-color: #161f2b;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+li {
+  padding: 0.5rem 0.5rem 0rem;
+}
+
+ul {
+  list-style: none;
+}
+
+p {
+  margin: 3px;
+}
+
+h1 {
+  margin: 0.25rem;
+  font-weight: bold;
+}
+
+h2 {
+  margin: 0.25rem;
+  font-size: medium;
+  font-weight: 100;
+}
+
+textarea {
+  border: none;
+  box-sizing: border-box;
+  background-color: #30435e;
+  padding: 0.75rem;
+  border-radius: 10px;
+  resize: none;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+textarea::placeholder {
+  opacity: 0.5;
+  transition: opacity 0.5s;
+}
+
+textarea:focus::placeholder {
+  opacity: 1;
+}
+
+textarea,
+textarea::placeholder {
+  font-family: inherit;
+  font-size: 1.1875rem;
+  color: inherit;
+}
+
+input[type="date"],
+input[type="time"] {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: #30435e;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+input[type="time"]::-webkit-inner-spin-button {
+  background-color: white;
+}
+
+@media only screen and (min-width: 980px) {
+  .site-container {
+    max-width: 32rem;
+    margin: auto;
+  }
+}
+
+.btn {
+  color: white;
+  background-color: #1da1f2;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0.75rem 2rem;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: opacity 0.5s;
+}
+
+.btn:hover {
+  opacity: 80%;
+}
+
+.card {
+  margin: 2px;
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px gray;
+}
+
+.head-card-content {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-flow: column;
+  gap: 0.25rem;
+  grid-gap: 0.25rem;
+}
+
+.head-card-details {
+  padding: 0.5rem;
+  grid-column: span 2 / span 2;
+}
+
+.content {
+  overflow: hidden;
+  margin: auto;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.w-half {
+  width: 50%;
+}
+
+.vertical-center-parent {
+  position: relative;
+}
+
+.vertical-center-child {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.mx-2 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.float-right {
+  float: right;
+}
