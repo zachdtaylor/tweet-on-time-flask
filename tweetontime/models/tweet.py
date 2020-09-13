@@ -43,4 +43,4 @@ class Tweet:
         db.commit()
 
     def __repr__(self):
-        return f"<Tweet: id={self.id} body='{self.body}' tweet_on='{self.tweet_on}'"
+        return f"<Tweet: id={self.id} body='{self.body}' tweet_on='{self.tweet_on}'>"
