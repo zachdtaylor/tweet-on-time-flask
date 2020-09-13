@@ -38,12 +38,15 @@ class User:
                 (self.username, generate_password_hash(self.password))
             )
         else:
-            row = db.execute(
+            db.execute(
                 'UPDATE user SET username = ?, password = ? WHERE id = ?',
                 (self.username, generate_password_hash(self.password), self.id)
             )
-            print(row)
         db.commit()
+
+        user = User.get(username=self.username)
+        self.id = user.id
+        self.password = user.password
 
     def __str__(self):
         return self.username
