@@ -4,7 +4,7 @@ from flask import (
 from werkzeug.exceptions import abort
 
 from .auth import login_required
-from .db import get_db
+from .models import Tweet
 from .tweet_on_time import get_profile_info, schedule_tweet
 
 bp = Blueprint('tweet', __name__)
