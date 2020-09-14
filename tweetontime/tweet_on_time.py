@@ -30,13 +30,22 @@ def post_tweet(tweet):
     return json.loads(res.text)
 
 
-def schedule_tweet(status, datetime_str):
-    tweet = Tweet(body=status, tweet_on=datetime_str)
-    tweet.save()
+def schedule_tweet(tweet=None, body=None, tweet_on=None):
+    """Adds a tweet to the scheduler. If a Tweet object is not passed,
+    must pass both body and tweet_on.
+
+    Parameters:
+        tweet (Tweet): The tweet to schedule.
+        body (str): The tweet body. Must be provided if tweet=None
+        tweet_on (str): The date/time to send the tweet. Must be provided if tweet=None
+    """
+    if not tweet:
+        tweet = Tweet(body=status, tweet_on=tweet_on)
+        tweet.save()
     tweet_scheduler.add_job(
         lambda: post_tweet(tweet),
         'date',
-        run_date=datetime.fromisoformat(datetime_str)
+        run_date=datetime.fromisoformat(tweet.tweet_on)
     )
 
 

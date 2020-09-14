@@ -17,6 +17,6 @@ def index():
         body = request.form['body']
         tweet_date = request.form['tweet-date']
         tweet_time = request.form['tweet-time']
-        schedule_tweet(body, f'{tweet_date} {tweet_time}')
+        schedule_tweet(body=body, tweet_on=f'{tweet_date} {tweet_time}')
     profile = get_profile_info()
     return render_template('tweet/index.html', profile=profile)
