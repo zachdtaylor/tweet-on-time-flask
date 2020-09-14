@@ -2,7 +2,8 @@ import atexit
 import os
 from datetime import datetime
 from flask import Flask
-from .tweet_on_time import tweet_scheduler
+from .models import Tweet
+from .tweet_on_time import tweet_scheduler, schedule_tweet
 from .settings import SECRET_KEY
 
 
@@ -34,5 +35,10 @@ def create_app(test_config=None):
 
     tweet_scheduler.start()
     atexit.register(lambda: tweet_scheduler.shutdown(wait=False))
+
+    # Delete stale tweets and add the rest to the scheduler
+    Tweet.delete_stale(buffer=60)
+    for tweet in Tweet.get_all():
+        schedule_tweet(tweet=tweet)
 
     return app
