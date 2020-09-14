@@ -40,7 +40,7 @@ def schedule_tweet(tweet=None, body=None, tweet_on=None):
         tweet_on (str): The date/time to send the tweet. Must be provided if tweet=None
     """
     if not tweet:
-        tweet = Tweet(body=status, tweet_on=tweet_on)
+        tweet = Tweet(body=body, tweet_on=tweet_on)
         tweet.save()
     tweet_scheduler.add_job(
         lambda: post_tweet(tweet),
