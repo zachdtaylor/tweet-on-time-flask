@@ -53,11 +53,14 @@ class Tweet:
         return [cls._from_row(row) for row in rows]
 
     @classmethod
-    def delete_stale(cls):
-        """Deletes all tweets whose tweet_on time has passed"""
+    def delete_stale(cls, buffer=0):
+        """Deletes all tweets whose tweet_on time has passed. Allows an optional buffer
+        which will be added to the current time. For example, if buffer=30, this would
+        delete all tweets where tweet_on is less than now + 30 seconds."""
         db = get_db()
         db.execute(
-            "DELETE FROM tweet WHERE tweet_on < strftime('%s', 'now')"
+            "DELETE FROM tweet WHERE tweet_on < strftime('%s', 'now') + ?",
+            (buffer,)
         )
         db.commit()
 
