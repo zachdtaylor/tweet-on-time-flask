@@ -5,6 +5,16 @@ from .fields import DateTimeField
 
 
 class Tweet:
+    """This class represents an individual tweet and provides methods for interacting
+    with the tweet table.
+
+    Attributes:
+        id (int): The tweet id
+        body (str): The tweet body
+        tweet_on (str): The date/time the tweet will be sent on. Must be of the
+            format %Y-%m-%d %H:%M
+    """
+
     def __init__(self, **kwargs):
         self.id = kwargs.get('id', None)
         self.body = kwargs.get('body', None)
@@ -20,6 +30,7 @@ class Tweet:
 
     @classmethod
     def get(cls, id=None):
+        """Returns the tweet with the given id"""
         sql = 'SELECT * FROM tweet WHERE id = ?'
         params = [id]
 
@@ -34,6 +45,7 @@ class Tweet:
 
     @classmethod
     def get_all(cls):
+        """Returns a list of all tweets"""
         db = get_db()
         rows = db.execute(
             'SELECT * FROM tweet'
@@ -42,6 +54,7 @@ class Tweet:
 
     @classmethod
     def delete_stale(cls):
+        """Deletes all tweets whose tweet_on time has passed"""
         db = get_db()
         db.execute(
             "DELETE FROM tweet WHERE tweet_on < strftime('%s', 'now')"
@@ -49,6 +62,7 @@ class Tweet:
         db.commit()
 
     def delete(self):
+        """Deletes the tweet"""
         db = get_db()
         if self.id:
             db.execute(
@@ -58,6 +72,8 @@ class Tweet:
             db.commit()
 
     def save(self):
+        """Creates a new tweet if self.id is None, otherwise updates the
+        existing tweet"""
         db = get_db()
         if not self.id:
             cursor = db.execute(
