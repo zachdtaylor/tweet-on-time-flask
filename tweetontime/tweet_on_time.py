@@ -6,6 +6,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime
 from requests_oauthlib import OAuth1
 from .settings import API_KEY, API_SECRET_KEY, ACCESS_TOKEN, ACCESS_TOKEN_SECRET
+from .models import Tweet
 
 auth = OAuth1(API_KEY, API_SECRET_KEY, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
@@ -21,16 +22,19 @@ def get_profile_info():
     return data
 
 
-def post_tweet(status):
-    encoded = urllib.parse.quote(status)
+def post_tweet(tweet):
+    encoded = urllib.parse.quote(tweet.body)
     url = f'https://api.twitter.com/1.1/statuses/update.json?status={encoded}'
     res = requests.post(url, auth=auth)
+    tweet.delete()
     return json.loads(res.text)
 
 
 def schedule_tweet(status, datetime_str):
+    tweet = Tweet(body=status, tweet_on=datetime_str)
+    tweet.save()
     tweet_scheduler.add_job(
-        lambda: post_tweet(status),
+        lambda: post_tweet(tweet),
         'date',
         run_date=datetime.fromisoformat(datetime_str)
     )
