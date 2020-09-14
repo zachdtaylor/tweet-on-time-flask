@@ -2,24 +2,27 @@ import sqlite3
 import click
 from flask import current_app, g
 from flask.cli import with_appcontext
+from .. import settings
+
+conn = None
 
 
 def get_db():
-    if 'db' not in g:
-        g.db = sqlite3.connect(
-            current_app.config['DATABASE'],
+    global conn
+    if not conn:
+        conn = sqlite3.connect(
+            settings.DATABASE['PATH'],
             detect_types=sqlite3.PARSE_DECLTYPES
         )
-        g.db.row_factory = sqlite3.Row
+        conn.row_factory = sqlite3.Row
 
-    return g.db
+    return conn
 
 
 def close_db(e=None):
-    db = g.pop('db', None)
-
-    if db is not None:
-        db.close()
+    global conn
+    if conn is not None:
+        conn.close()
 
 
 def init_db():
