@@ -3,7 +3,6 @@ import functools
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
-from werkzeug.security import check_password_hash, generate_password_hash
 
 from .models import User
 from .tweet_on_time import tweet_scheduler
@@ -45,7 +44,7 @@ def login():
 
         if user is None:
             error = 'Incorrect username.'
-        elif not check_password_hash(user.password, password):
+        elif not user.check_password(password):
             error = 'Incorrect password.'
 
         if error is None:

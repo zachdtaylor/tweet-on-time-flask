@@ -1,10 +1,19 @@
 from sqlite3 import OperationalError
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from .db import get_db
 
 
 class User:
+    """This class represents an individual user and provides methods for interacting
+    with the user table.
+
+    Attributes:
+        id (int): The user id
+        username (str): The username
+        password (str): The password. Gets hashed when saved to the db.
+    """
+
     def __init__(self, **kwargs):
         self.id = kwargs.get('id', None)
         self.username = kwargs.get('username', None)
@@ -12,6 +21,7 @@ class User:
 
     @classmethod
     def get(cls, id=None, username=None):
+        """Returns the user with the given id or username"""
         sql = 'SELECT * FROM user WHERE'
         params = []
         if id:
@@ -30,7 +40,13 @@ class User:
             return None
         return cls(**row)
 
+    def check_password(self, password):
+        """Returns true if the given password is correct"""
+        return check_password_hash(self.password, password)
+
     def save(self):
+        """Creates a new user if self.id is None, otherwise updates the
+        existing user"""
         db = get_db()
         if not self.id:
             db.execute(
