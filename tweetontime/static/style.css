@@ -77,6 +77,10 @@ textarea::placeholder {
   color: inherit;
 }
 
+nav {
+  flex-direction: row;
+}
+
 input[type="date"],
 input[type="time"] {
   font-family: inherit;
@@ -96,11 +100,22 @@ input[type="time"]::-webkit-inner-spin-button {
   background-color: white;
 }
 
-@media only screen and (min-width: 980px) {
-  .site-container {
-    max-width: 32rem;
-    margin: auto;
-  }
+#hamburgerbtn {
+  width: 2.5rem;
+}
+
+#nav-list {
+  display: none;
+  margin: 0.75rem 0.25rem;
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.25rem 1rem 0.25rem 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .btn {
@@ -140,8 +155,21 @@ input[type="time"]::-webkit-inner-spin-button {
 }
 
 .content {
+  padding: 0 1rem;
   overflow: hidden;
   margin: auto;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.bottom-0 {
+  bottom: 0;
 }
 
 .flex {
@@ -164,8 +192,16 @@ input[type="time"]::-webkit-inner-spin-button {
   width: 100%;
 }
 
+.h-full {
+  height: 100%;
+}
+
 .w-half {
   width: 50%;
+}
+
+.h-3 {
+  height: 3rem;
 }
 
 .vertical-center-parent {
@@ -193,4 +229,30 @@ input[type="time"]::-webkit-inner-spin-button {
 
 .float-right {
   float: right;
+}
+
+@media only screen and (min-width: 768px) {
+  nav {
+    display: flex;
+    justify-content: space-between;
+    border-bottom-width: 2px;
+  }
+
+  #hamburgerbtn {
+    display: none;
+  }
+
+  #nav-list {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .site-container {
+    max-width: 768px;
+    margin: auto;
+  }
+
+  .nav-container {
+    box-shadow: none;
+  }
 }

@@ -6,11 +6,57 @@
 </head>
 <body>
   <div class="site-container">
-    <nav class="flex flex-row justify-between">
-      <div class="vertical-center-parent w-half">
-        <h1 class="vertical-center-child">Tweet On Time</h1>
+    <nav>
+      <div class="nav-container">
+        <div class="vertical-center-parent w-half h-3">
+          <h1 class="vertical-center-child">Tweet On Time</h1>
+        </div>
+        <div id="hamburgerbtn" class="vertical-center-parent">
+          <div class="vertical-center-child">
+            <svg
+              version="1.1"
+              baseProfile="full"
+              viewBox="0 0 100 100"
+              class="w-full h-full"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="0"
+                y="0"
+                rx="5"
+                width="100%"
+                height="100%"
+                fill="#161f2b"
+              />
+              <rect
+                x="15"
+                y="25"
+                height="9"
+                rx="4"
+                width="71.5"
+                fill="#f7fafc"
+              />
+              <rect
+                x="15"
+                y="45"
+                height="9"
+                rx="4"
+                width="71.5"
+                fill="#f7fafc"
+              />
+              <rect
+                x="15"
+                y="65"
+                height="9"
+                rx="4"
+                width="71.5"
+                fill="#f7fafc"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
-      <ul class="flex flex-row">
+      <ul id="nav-list">
         {% if g.user %}
         <a href="{{ url_for('auth.logout') }}">
           <li>Log Out</li>
@@ -27,10 +73,20 @@
     </nav>
     <section class="content">
       <header>{% block header %}{% endblock %}</header>
-
       {% for message in get_flashed_messages() %}
       <div class="flash">{{ message }}</div>
       {% endfor %} {% block content %}{% endblock %}
     </section>
   </div>
+
+  <script>
+    document.getElementById("hamburgerbtn").onclick = function onClick() {
+      let navList = document.getElementById("nav-list");
+      if (!navList.style.display || navList.style.display === "none") {
+        navList.style.display = "block";
+      } else {
+        navList.style.display = "none";
+      }
+    };
+  </script>
 </body>
