@@ -11,6 +11,7 @@ bp = Blueprint('tweet', __name__)
 
 
 @bp.route('/', methods=['GET', 'POST'])
+@login_required
 def index():
     if request.method == 'POST':
         body = request.form['body']
