@@ -218,8 +218,12 @@ input[type="time"]::-webkit-inner-spin-button {
   margin: 0.25rem;
 }
 
-.mx-1 {
+.my-1 {
   margin: 0.25rem 0;
+}
+
+.mt-7 {
+  margin-top: 1.75rem;
 }
 
 .mt-4 {
@@ -227,8 +231,7 @@ input[type="time"]::-webkit-inner-spin-button {
 }
 
 .mx-4 {
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin: 0 1rem;
 }
 
 .hidden {

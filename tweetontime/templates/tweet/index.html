@@ -8,8 +8,8 @@ content %}
       alt="Twitter Profile Picture"
     />
     <div class="head-card-details">
-      <h1 class="mx-1">{{ profile['name'] }}</h1>
-      <h2 class="mx-1">@{{ profile['screen_name'] }}</h2>
+      <h1 class="my-1">{{ profile['name'] }}</h1>
+      <h2 class="my-1">@{{ profile['screen_name'] }}</h2>
       <p class="mt-4">{{ profile['description'] }}</p>
     </div>
   </div>
@@ -21,7 +21,7 @@ content %}
     name="body"
     id="body"
     rows="6"
-    placeholder="What's Happening?"
+    placeholder="What's happening?"
     required
   ></textarea>
   <div class="flex flex-row mt-4">
@@ -30,11 +30,11 @@ content %}
       <input type="date" id="tweet-date" name="tweet-date" required />
     </div>
     <div class="mx-4">
-      <label for="tweet-time mx-1"> Time </label>
+      <label for="tweet-time my-1"> Time </label>
       <input type="time" id="tweet-time" name="tweet-time" required />
     </div>
   </div>
-  <div class="mt-4 float-right">
+  <div class="mt-7 float-right">
     <input type="submit" value="Schedule Tweet" class="btn" />
   </div>
 </form>
