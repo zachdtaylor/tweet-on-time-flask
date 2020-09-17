@@ -1,7 +1,7 @@
 html {
   font-family: arial, helvetica;
   font-size: 1.1875rem;
-  color: white;
+  color: #e2e8f0;
 }
 
 body {
@@ -31,6 +31,7 @@ li {
 
 ul {
   list-style: none;
+  padding: 0;
 }
 
 p {
@@ -106,7 +107,7 @@ input[type="time"]::-webkit-inner-spin-button {
 
 #nav-list {
   display: none;
-  margin: 0.75rem 0.25rem;
+  margin: 0.75rem 1.25rem;
 }
 
 .nav-container {
@@ -116,6 +117,11 @@ input[type="time"]::-webkit-inner-spin-button {
   padding: 0.25rem 1rem 0.25rem 0.5rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.nav-list-item {
+  padding: 1rem 0;
+  border-bottom: 2px solid #e2e8f0;
 }
 
 .btn {
@@ -196,12 +202,12 @@ input[type="time"]::-webkit-inner-spin-button {
   height: 100%;
 }
 
-.w-half {
-  width: 50%;
-}
-
 .h-3 {
   height: 3rem;
+}
+
+.h-2\/3 {
+  height: 66%;
 }
 
 .vertical-center-parent {
@@ -253,6 +259,12 @@ input[type="time"]::-webkit-inner-spin-button {
   }
 
   .nav-container {
+    width: 12rem;
     box-shadow: none;
+  }
+
+  .nav-list-item {
+    padding: 0.5rem 1rem;
+    border-bottom-width: 0;
   }
 }

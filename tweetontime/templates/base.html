@@ -8,16 +8,16 @@
   <div class="site-container">
     <nav>
       <div class="nav-container">
-        <div class="vertical-center-parent w-half h-3">
-          <h1 class="vertical-center-child">Tweet On Time</h1>
+        <div class="vertical-center-parent w-full h-full h-3">
+          <h1 class="vertical-center-child h-2/3">Tweet On Time</h1>
         </div>
         <div id="hamburgerbtn" class="vertical-center-parent">
-          <div class="vertical-center-child">
+          <div class="vertical-center-child h-2/3">
             <svg
               version="1.1"
               baseProfile="full"
               viewBox="0 0 100 100"
-              class="w-full h-full"
+              class="w-full"
               xmlns="http://www.w3.org/2000/svg"
             >
               <rect
@@ -59,14 +59,14 @@
       <ul id="nav-list">
         {% if g.user %}
         <a href="{{ url_for('auth.logout') }}">
-          <li>Log Out</li>
+          <li class="nav-list-item">Log Out</li>
         </a>
         {% else %}
         <a href="{{ url_for('auth.register') }}">
-          <li>Register</li>
+          <li class="nav-list-item">Register</li>
         </a>
         <a href="{{ url_for('auth.login') }}">
-          <li>Log In</li>
+          <li class="nav-list-item">Log In</li>
         </a>
         {% endif %}
       </ul>
@@ -85,7 +85,7 @@
       if (!navList.style.display || navList.style.display === "none") {
         navList.style.display = "block";
       } else {
-        navList.style.display = "none";
+        navList.removeAttribute("style");
       }
     };
   </script>
