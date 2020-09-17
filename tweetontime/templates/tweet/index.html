@@ -1,19 +1,20 @@
 {% extends 'base.html' %} {% block title %} Tweet {% endblock %} {% block
 content %}
-<div class="mt-1">
+<div class="mt-4">
   <div class="head-card-content">
     <img
+      id="profile-picture"
       src="{{ profile['profile_image_url_https'] }}"
       alt="Twitter Profile Picture"
     />
     <div class="head-card-details">
-      <h1>{{ profile['name'] }}</h1>
-      <h2>@{{ profile['screen_name'] }}</h2>
-      <p class="mt-1">{{ profile['description'] }}</p>
+      <h1 class="mx-1">{{ profile['name'] }}</h1>
+      <h2 class="mx-1">@{{ profile['screen_name'] }}</h2>
+      <p class="mt-4">{{ profile['description'] }}</p>
     </div>
   </div>
 </div>
-<form method="post" class="mt-1">
+<form method="post" class="mt-4">
   <label for="body" class="hidden">Tweet Content</label>
   <textarea
     class="w-full"
@@ -23,17 +24,17 @@ content %}
     placeholder="What's Happening?"
     required
   ></textarea>
-  <div class="flex flex-row mt-1">
+  <div class="flex flex-row mt-4">
     <div>
       <label for="tweet-date"> Date </label>
       <input type="date" id="tweet-date" name="tweet-date" required />
     </div>
-    <div class="mx-2">
+    <div class="mx-4">
       <label for="tweet-time mx-1"> Time </label>
       <input type="time" id="tweet-time" name="tweet-time" required />
     </div>
   </div>
-  <div class="mt-1 float-right">
+  <div class="mt-4 float-right">
     <input type="submit" value="Schedule Tweet" class="btn" />
   </div>
 </form>
