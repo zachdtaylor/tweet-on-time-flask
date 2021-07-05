@@ -4,7 +4,7 @@ from flask import (
 from werkzeug.exceptions import abort
 
 from .auth import login_required
-from .db import get_db
+from .models import Tweet
 from .tweet_on_time import get_profile_info, schedule_tweet
 
 bp = Blueprint('tweet', __name__)
@@ -17,6 +17,6 @@ def index():
         body = request.form['body']
         tweet_date = request.form['tweet-date']
         tweet_time = request.form['tweet-time']
-        schedule_tweet(body, f'{tweet_date} {tweet_time}')
+        schedule_tweet(body=body, tweet_on=f'{tweet_date} {tweet_time}')
     profile = get_profile_info()
     return render_template('tweet/index.html', profile=profile)
